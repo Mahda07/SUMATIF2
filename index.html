@@ -49,22 +49,21 @@
          "<td>" + "<a href='#' class='me-2 link-ubah' data='"+ data.id +"'>ubah</a><button class='btn btn-danger tombol-hapus' data='"+ data.id +"'>hapus</button>" +"</td>" +
          "</tr>"
          )
-         nomor = nomor + 1
-     })
-     
-     
-     $(".tombol-hapus").click(async function(){
-       if (confirm("apakah benar mau menghapus?")) {
-         await hapusBarang($(this).attr('data'))
-       location.reload()
-       }
-     })
-     $(".link-ubah").click(async function(){
-       location.replace('formubah.html?id=' + $(this).attr('data'))
-     })
-     
-    })
-    
-  </script>
-  
+})
+
+$('.tombol-hapus').click(async function() {
+await hapusSiswa($(this).attr('data'))
+location.reload()
+})
+
+$('.link-ubah').click(async function () {
+location.replace('formulirubah.html?id=' + $(this).attr('data'))
+})
+
+
+})
+</script>
+
 </body>
+
+</html>

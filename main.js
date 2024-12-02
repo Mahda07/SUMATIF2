@@ -66,7 +66,7 @@ export async function ambilDaftarPelanggan() {
   return hasilKueri;
 }
   
- export async function ubahBarang(id, nama,alamat,notlpon) {
+ export async function ubahPelanggan(id, nama,alamat,notlpon) {
    await updateDoc(
      doc(basisdata, "pelanggan2", id),
      { 
