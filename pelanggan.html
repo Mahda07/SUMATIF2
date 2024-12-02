@@ -38,7 +38,7 @@
   <a href="index.html">kembali ke pelanggan</a>
 
   <script type="module">
-    import { tambahDataPelanggan } from "./main.js";
+    import { tambahPelanggan } from "./main.js";
 
     $(document).ready(async function() {
       // ketika tombol tambah di pencet
@@ -50,7 +50,7 @@
         let alamat = $("#inputalamat").val()
         let tlpon = $("#inputtlpon").val()
 
-        await tambahDataPelanggan(nama, alamat, tlpon)
+        await tambahPelanggan(nama, alamat, tlpon)
         window.location.href = "index.html"
       })
     })
