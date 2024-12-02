@@ -1,3 +1,4 @@
+
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js'
 import {
   getFirestore,
@@ -27,31 +28,13 @@ const firebaseConfig = {
 const aplikasi = initializeApp(firebaseConfig)
 const basisdata = getFirestore(aplikasi)
 
-export async function ambilDataPelanggan() {
-  const refDokumen = collection(basisdata, "Pelanggan2");
-  const kueri = query(refDokumen, orderBy("nama"));
-  const cuplikanKueri = await getDocs(kueri);
-
-  let hasilKueri = [];
-  cuplikanKueri.forEach((dokumen) => {
-    hasilKueri.push({
-      id: dokumen.id,
-      nama: dokumen.data().nama,
-      alamat: dokumen.data().alamat,
-      tlpon: dokumen.data().tlpon
-    })
-  })
-
-  return hasilKueri;
-}
-
-export async function tambahDataPelanggan(nama, alamat, tlpon) {
+export async function tambahPelanggan(nama, alamat, notlpon) {
   try {
     // menyimpan data ke firebase
-    const refDokumen = await addDoc(collection(basisdata, "Pelanggan2"), {
+    const refDokumen = await addDoc(collection(basisdata, "pelanggan2"), {
       nama: nama,
-      alamat:alamat,
-      tlpon: tlpon
+      alamat: alamat,
+      notlpon: notlpon
     })
 
     // menampilkan pesan berhasil
@@ -61,3 +44,43 @@ export async function tambahDataPelanggan(nama, alamat, tlpon) {
     console.log("gagal menyimpan data pelanggan" + e)
   }
 }
+export async function hapusPelanggan(id) {
+    await deleteDoc(doc(basisdata,"pelanggan2",id))
+  }
+
+export async function ambilDaftarPelanggan() {
+  const refDokumen = collection(basisdata, "pelanggan2");
+  const kueri = query(refDokumen, orderBy("nama"));
+  const cuplikanKueri = await getDocs(kueri);
+  
+  let hasilKueri = []; 
+  cuplikanKueri.forEach((dokumen) => {
+    hasilKueri.push({
+      id: dokumen.id,
+      nama: dokumen.data().nama,
+      alamat: dokumen.data().alamat,
+      notlpon: dokumen.data().notlpon
+    })
+  })
+  
+  return hasilKueri;
+}
+  
+ export async function ubahBarang(id, nama,alamat,notlpon) {
+   await updateDoc(
+     doc(basisdata, "pelanggan2", id),
+     { 
+     nama: nama,
+     alamat: alamat,
+     notlpon:notlpon
+       
+     })
+   }
+   
+   export async function ambilPelanggan(id) {
+    const refDokumen = await doc(basisdata, "pelanggan2", id)
+    const snapshotDocumen = await getDoc(refDokumen)
+    
+    return await snapshotDocumen.data()
+  }
+
